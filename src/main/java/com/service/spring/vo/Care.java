@@ -12,6 +12,8 @@ public abstract class Care {
     private String img;
     private Timestamp date;
     private String memo;
+    private String careType;
 
     public Care() {}
+
 }
