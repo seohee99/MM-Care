@@ -15,7 +15,7 @@ import java.util.List;
 @SpringBootTest
 @Transactional
 @Commit
-public class MyBatisTest {
+public class AMyBatisTest {
 
     @Autowired
     private UserDAO userDAO;

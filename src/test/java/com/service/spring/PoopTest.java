@@ -18,7 +18,7 @@ import java.util.Date;
 @SpringBootTest
 @Transactional
 @Commit
-public class MyBatisTestCare {
+public class PoopTest {
 
     @Autowired
     private UserDAO userDAO;
