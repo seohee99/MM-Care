@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="sql.eat.mapper">
+    <insert id="checkEat" parameterType="eat">
+        INSERT INTO CARE_EAT (pet_seq, date, memo, cnt, nickname, img)
+        VALUES (#{petSeq}, DATE_ADD(#{date}, INTERVAL 9 HOUR), #{memo}, #{cnt}, #{nickname}, #{img})
+    </insert>
+    <select id="showAll" parameterType="eat" resultType="eat">
+        SELECT pet_seq, DATE_SUB(date, INTERVAL 9 HOUR) AS date, memo, cnt, nickname, img
+        FROM CARE_EAT
+        WHERE pet_seq = #{petSeq} AND DATE(date) = DATE(DATE_ADD(#{date}, INTERVAL 9 HOUR))
+    </select>
+    <update id="updateEat" parameterType="eat">
+        UPDATE CARE_EAT
+        SET memo = #{memo},
+            img = #{img}
+        WHERE pet_seq = #{petSeq} AND DATE(date) = DATE(DATE_ADD(#{date}, INTERVAL 9 HOUR)) AND cnt = #{cnt}
+    </update>
+    <delete id="deleteEat" parameterType="eat">
+        DELETE FROM CARE_EAT
+        WHERE pet_seq = #{petSeq} AND DATE(date) = DATE(DATE_ADD(#{date}, INTERVAL 9 HOUR)) AND cnt = #{cnt}
+    </delete>
+</mapper>
