@@ -1,5 +1,6 @@
 package com.service.spring.vo;
 
+import lombok.Builder;
 import lombok.Data;
 
 import java.sql.Timestamp;
