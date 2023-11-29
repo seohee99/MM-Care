@@ -12,3 +12,7 @@ mybatis:
   config-location: classpath:/config/SqlMapConfig.xml
   mapper-locations: classpath:/mapper/**/*.xml
   typeAliasesPackage: com.service.spring.vo
+
+kakao:
+  client-id: 53e47295bcafa934bd27aa2b6a07b1f7
+  redirect-url: http://localhost:3000/group
