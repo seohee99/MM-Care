@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="sql.usergroup.mapper">
-    <select id="getGroup" resultType="group">
-        SELECT *
-        FROM USER_GROUP
-    </select>
-</mapper>
