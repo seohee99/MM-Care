@@ -2,7 +2,6 @@ package com.service.spring;
 
 import com.service.spring.dao.PoopDAO;
 import com.service.spring.service.PoopService;
-import com.service.spring.vo.Care;
 import com.service.spring.vo.Poop;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,8 +10,6 @@ import org.springframework.test.annotation.Commit;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 
 @SpringBootTest

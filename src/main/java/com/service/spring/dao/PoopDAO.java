@@ -1,6 +1,5 @@
 package com.service.spring.dao;
 
-import com.service.spring.vo.Eat;
 import com.service.spring.vo.Poop;
 
 import java.util.List;
