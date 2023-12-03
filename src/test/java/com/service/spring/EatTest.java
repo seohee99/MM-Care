@@ -2,6 +2,7 @@ package com.service.spring;
 
 import com.service.spring.dao.EatDAO;
 import com.service.spring.service.EatService;
+import com.service.spring.vo.Care;
 import com.service.spring.vo.Eat;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +11,7 @@ import org.springframework.test.annotation.Commit;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Timestamp;
+import java.util.List;
 
 @SpringBootTest
 @Transactional
@@ -32,8 +34,8 @@ public class EatTest {
         eat.setNickname("용훈3");
 
         // 항목 추가 (체크하기) 테스트
-        int flag = eatService.checkEat(eat);
-        System.out.println("flag: " + flag);
+//        int flag = eatService.checkEat(eat);
+//        System.out.println("flag: " + flag);
 
         // 수정 테스트
 //        int flag2 = eatService.modifyEat(eat);
@@ -44,10 +46,10 @@ public class EatTest {
 //        System.out.println("flag3: " + flag3);
 
         // 당일 체크 리스트 전체 조회 테스트
-//        List<Eat> eatlist = eatService.showCheckList(eat);
-//        Care care  = new Eat();
-//        for(Eat eats : eatlist){
-//            System.out.println(eats);
-//        }
+        List<Eat> eatlist = eatService.showCheckList(eat);
+        Care care  = new Eat();
+        for(Eat eats : eatlist){
+            System.out.println(eats);
+        }
     }
 }

@@ -4,21 +4,21 @@
     <select id="getWalkCheckCnt" parameterType="care" resultType="int">
         SELECT MAX(cnt)
         FROM CARE_WALK
-        WHERE pet_seq = #{petSeq} AND DATE(date) = DATE(DATE_ADD(#{date}, INTERVAL 9 HOUR))
+        WHERE pet_seq = #{petSeq} AND DATE(date) = DATE(#{date})
     </select>
     <select id="getEatCheckCnt" parameterType="care" resultType="int">
         SELECT MAX(cnt)
         FROM CARE_EAT
-        WHERE pet_seq = #{petSeq} AND DATE(date) = DATE(DATE_ADD(#{date}, INTERVAL 9 HOUR))
+        WHERE pet_seq = #{petSeq} AND DATE(date) = DATE(#{date})
     </select>
     <select id="getMedicineCheckCnt" parameterType="care" resultType="int">
         SELECT MAX(cnt)
         FROM CARE_MEDICINE
-        WHERE pet_seq = #{petSeq} AND DATE(date) = DATE(DATE_ADD(#{date}, INTERVAL 9 HOUR))
+        WHERE pet_seq = #{petSeq} AND DATE(date) = DATE(#{date})
     </select>
     <select id="getPoopCheckCnt" parameterType="care" resultType="int">
         SELECT MAX(cnt)
         FROM CARE_POOP
-        WHERE pet_seq = #{petSeq} AND DATE(date) = DATE(DATE_ADD(#{date}, INTERVAL 9 HOUR))
+        WHERE pet_seq = #{petSeq} AND DATE(date) = DATE(#{date})
     </select>
 </mapper>
