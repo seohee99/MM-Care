@@ -8,9 +8,6 @@ import lombok.NoArgsConstructor;
 import java.sql.Timestamp;
 
 @Data
-@Builder
-@AllArgsConstructor
-@NoArgsConstructor
 public abstract class Care {
     private long petSeq;
     private int cnt;

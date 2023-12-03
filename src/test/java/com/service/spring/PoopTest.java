@@ -1,10 +1,9 @@
 package com.service.spring;
 
-import com.service.spring.dao.UserDAO;
-import com.service.spring.dao.UserGroupDAO;
-import com.service.spring.service.CareService;
+import com.service.spring.dao.PoopDAO;
+import com.service.spring.service.PoopService;
 import com.service.spring.vo.Care;
-import com.service.spring.vo.Walk;
+import com.service.spring.vo.Poop;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -14,33 +13,46 @@ import org.springframework.transaction.annotation.Transactional;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 @SpringBootTest
-@Transactional
-@Commit
 public class PoopTest {
 
     @Autowired
-    private UserDAO userDAO;
-
+    private PoopDAO poopDAO;
     @Autowired
-    private CareService careService;
-    @Autowired
-    private UserGroupDAO userGroupDAO;
+    private PoopService poopService;
 
     @Test
     public void unitTest() throws Exception{
-        String type = "eat";
-        Care care = new Walk();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-        Date parsedDate = dateFormat.parse("2023-11-26 08:59");
-        Timestamp timestamp = new Timestamp(parsedDate.getTime());
-        System.out.println(timestamp);
-        care.setDate(timestamp);
-        care.setCareType(type);
-        care.setPetSeq(1);
+        Poop poop = new Poop();
+        Timestamp currentTimestamp = new Timestamp(System.currentTimeMillis());
+        poop.setDate(currentTimestamp);
+        poop.setPetSeq(3);
+        poop.setMemo("멤모입니다.");
+        poop.setPoopCnt(2);
+        poop.setPeeCnt(6);
+        poop.setImg("응아사진");
+        poop.setNickname("유완");
 
-        int cnt = careService.getCheckCnt(care);
-        System.out.println( "오늘의 체크 회수: "+cnt+"...");
+//      항목 추가하고 뜨는지 확인
+//        int result = poopService.checkPoop(poop);
+//        System.out.println(result);
+
+//        수정되는지 확인
+//        int result2 = poopService.modifyPoop(poop);
+//        System.out.println(result2);
+
+//        삭제 확인
+//        int result = poopService.deletePoop(poop);
+//        System.out.println(result);
+
+//      체크 리스트 전체 조회 테스트
+//        List<Poop> pooplist = poopService.showCheckList(poop);
+//        Care care  = new Poop();
+//        for(Poop poops : pooplist){
+//            System.out.println(poops);
+//        }
+
     }
 }

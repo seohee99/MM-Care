@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="sql.poop.mapper">
+    <insert id="checkPoop" parameterType="poop">
+        INSERT INTO CARE_POOP (pet_seq, date, memo, poop_cnt, pee_cnt, nickname, img)
+        VALUES (#{petSeq}, #{date}, #{memo}, #{poopCnt} , #{peeCnt}, #{nickname}, #{img})
+    </insert>
+    <select id="showAll" parameterType="poop" resultType="poop">
+        SELECT poop_seq, pet_seq, date, memo, poop_cnt, pee_cnt, nickname, img
+        FROM CARE_POOP
+        WHERE pet_seq = #{petSeq} AND DATE(date) = DATE(#{date})
+    </select>
+    <update id="updatePoop" parameterType="poop">
+        UPDATE CARE_POOP
+        SET memo = #{memo},
+            img = #{img},
+            poop_cnt = #{poopCnt},
+            pee_cnt = #{peeCnt}
+        WHERE pet_seq = #{petSeq} AND DATE(date) = DATE(#{date})
+    </update>
+    <delete id="deletePoop" parameterType="poop">
+        DELETE FROM CARE_POOP
+        WHERE pet_seq = #{petSeq} AND DATE(date) = DATE(#{date})
+    </delete>
+</mapper>
