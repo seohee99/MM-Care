@@ -1,10 +1,9 @@
 package com.service.spring;
 
-import com.service.spring.dao.UserDAO;
-import com.service.spring.dao.UserGroupDAO;
-import com.service.spring.service.CareService;
+import com.service.spring.dao.MedicineDAO;
+import com.service.spring.service.MedicineService;
 import com.service.spring.vo.Care;
-import com.service.spring.vo.Walk;
+import com.service.spring.vo.Medicine;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -12,8 +11,7 @@ import org.springframework.test.annotation.Commit;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.List;
 
 @SpringBootTest
 @Transactional
@@ -21,26 +19,39 @@ import java.util.Date;
 public class MedicineTest {
 
     @Autowired
-    private UserDAO userDAO;
-
+    private MedicineDAO medicineDAO;
     @Autowired
-    private CareService careService;
-    @Autowired
-    private UserGroupDAO userGroupDAO;
+    private MedicineService medicineService;
 
     @Test
     public void unitTest() throws Exception{
-        String type = "eat";
-        Care care = new Walk();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-        Date parsedDate = dateFormat.parse("2023-11-26 08:59");
-        Timestamp timestamp = new Timestamp(parsedDate.getTime());
-        System.out.println(timestamp);
-        care.setDate(timestamp);
-        care.setCareType(type);
-        care.setPetSeq(1);
+        Medicine medicine = new Medicine();
+        Timestamp currentTimestamp = new Timestamp(System.currentTimeMillis());
+        medicine.setDate(currentTimestamp);
+        medicine.setPetSeq(1);
+        medicine.setMedicineType("알약");
+        medicine.setMemo("메모 수정합니다.");
+        medicine.setCnt(1);
+        medicine.setNickname("김유완");
 
-        int cnt = careService.getCheckCnt(care);
-        System.out.println( "오늘의 체크 회수: "+cnt+"...");
+//      항목 추가하고 뜨는지 확인
+//        int result = medicineService.checkMedicine(medicine);
+//        System.out.println(result);
+
+//        수정되는지 확인
+//        int result2 = medicineService.modifyMedicine(medicine);
+//        System.out.println(result2);
+
+//        삭제 확인
+//        int result = medicineService.deleteMedicine(medicine);
+//        System.out.println(result);
+
+//      체크 리스트 전체 조회 테스트
+        List<Medicine> medicinelist = medicineService.showCheckList(medicine);
+        Care care  = new Medicine();
+        for(Medicine medicines : medicinelist){
+            System.out.println(medicines);
+        }
+
     }
 }
