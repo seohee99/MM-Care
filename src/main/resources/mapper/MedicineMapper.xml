@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="sql.medicine.mapper">
+    <insert id="checkMedicine" parameterType="medicine">
+        INSERT INTO CARE_MEDICINE (pet_seq, medicine_type, date, memo, cnt, nickname)
+        VALUES (#{petSeq}, #{medicineType}, #{date}, #{memo}, #{cnt}, #{nickname})
+    </insert>
+    <select id="showAll" parameterType="medicine" resultType="medicine">
+        SELECT medicine_seq, pet_seq, medicine_type, date, memo, cnt, nickname
+        FROM CARE_MEDICINE
+        WHERE pet_seq = #{petSeq} AND DATE(date) = DATE(#{date})
+    </select>
+    <update id="updateMedicine" parameterType="medicine">
+        UPDATE CARE_MEDICINE
+        SET memo = #{memo},
+            medicine_type = #{medicineType},
+            cnt = #{cnt}
+        WHERE pet_seq = #{petSeq} AND DATE(date) = DATE(#{date})
+    </update>
+    <delete id="deleteMedicine" parameterType="medicine">
+        DELETE FROM CARE_MEDICINE
+        WHERE pet_seq = #{petSeq} AND DATE(date) = DATE(#{date})
+    </delete>
+</mapper>
