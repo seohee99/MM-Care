@@ -4,6 +4,7 @@ import styled from "styled-components";
 import dogImg from "./image/dog.png";
 import check from "./image/full.png";
 import checkEmpty from "./image/emty.png";
+import { useNavigate } from "react-router-dom";
 
 function CareMainPage() {
   const [userId, setUserId] = useState("");
@@ -21,6 +22,17 @@ function CareMainPage() {
   const [peeCnt, setPeeCnt] = useState(0);
 
   useEffect(() => {
+    sessionStorage.setItem("userId", 1);
+    sessionStorage.setItem("petName", "멈뭄미");
+    sessionStorage.setItem("petBirthday", "1997-09-05");
+    sessionStorage.setItem("userId", 1);
+    sessionStorage.setItem("foodCnt", 3);
+    sessionStorage.setItem("foodMaxCnt", 5);
+    sessionStorage.setItem("walkCnt", 2);
+    sessionStorage.setItem("walkMaxCnt", 3);
+    sessionStorage.setItem("mediCnt", 1);
+    sessionStorage.setItem("mediMaxCnt", 6);
+
     let fetchData = sessionStorage.getItem("userId");
     setUserId(fetchData);
 
@@ -57,6 +69,11 @@ function CareMainPage() {
     fetchData = sessionStorage.getItem("mediMaxCnt");
     setMediMaxCnt(fetchData);
   }, []);
+
+  const movePage = useNavigate();
+  function go() {
+    movePage("/aa");
+  }
   return (
     <Container>
       <Profile>
@@ -72,7 +89,7 @@ function CareMainPage() {
       <Notice>
         <Title>
           <a>공지사항</a>
-          <NoticeButton>수정</NoticeButton>
+          <NoticeButton onClick={go}>수정</NoticeButton>
         </Title>
         <a>약 잘 먹이기!</a>
       </Notice>
