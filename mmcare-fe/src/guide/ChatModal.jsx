@@ -25,9 +25,14 @@ export default function ChatModal() {
       overflow: 'hidden',
       align : 'right'
   };
-
+  
+  const chatStyle ={
+    position: 'absolute',
+    bottom: '1px',
+    right: '1px'
+  }
   return (
-    <div>
+    <div style={chatStyle}>
       <img src={chat} alt="chat" style={imgStyle} onClick={handleClickOpen} /> {/* 이미지 클릭 시 ChatModal 열기 */}
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle>물어보고 싶은 걸 물어보라 멍!</DialogTitle>

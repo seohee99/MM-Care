@@ -45,6 +45,7 @@ export default function GuideList() {
     
     <Sheet
       sx={{
+        position: 'relative',
         display: 'flex', 
         flexDirection: 'column', 
         justifyContent: 'center', // 가운데 정렬
