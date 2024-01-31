@@ -4,5 +4,6 @@
     <select id="getUser" parameterType="string" resultType="user">
         SELECT *
         FROM USER
+        WHERE user_email = #{VALUE};
     </select>
 </mapper>
