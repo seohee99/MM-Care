@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import styled from 'styled-components';
-import axios from 'axios';
 
 /* Image */
 import naverBtnImg from './image/naver_login.png';
@@ -9,20 +8,11 @@ import backgroundImg from './image/background.png';
 import logoImg from './image/logo.png';
 import dogImg from './image/dog.png';
 
-import { KAKAO_API_URL, REQUEST_URL } from './js/OAuth.js';
 
 function LoginPage() {
     
     const handleLoginClick = () => {
-        window.open(KAKAO_API_URL, '_self');
-        const url = new URL(window.location.href);
-        const code = url.searchParams.get("code");
-        fetch(`${REQUEST_URL}auth/kakao/callback?code=${code}`)
-        .then((response) => response.json())
-        .then((data) => {
-            localStorage.setItem("token", data.token);
-            alert(data.token);
-        });
+        window.open(process.env.REACT_APP_KAKAO_LOGIN_URL, '_self');
     };
 
     return (
@@ -37,7 +27,7 @@ function LoginPage() {
                 <Box>
                     <LoginBox>
                         <div style={{display: "flex", alignItems: "center"}}>
-                            <div style={{fontWeight: "bold", color: "#3B362B"}}>멍뭉케어 시작하기<Dog src={dogImg}/></div>
+                            <div style={{fontWeight: "bold", color: "#3B362B"}}>멍뭉케어 시작하기</div>
                         </div>
                         <div style={{padding:"20px", display: "flex", justifyContent: "space-between" }}>
                             <img src={kakaoBtnImg} onClick={handleLoginClick} style={{height: "40px"}}/>
@@ -53,7 +43,7 @@ function LoginPage() {
 const Container = styled.div`
     background-image: url(${backgroundImg});
     width: 100%;
-    height: 100%;
+    height: 100vh;
 `
 
 const Wrapper = styled.div`
