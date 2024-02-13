@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="sql.join.mapper">
+
+    <!-- 그룹원 추가(보류)  -->
+    <insert id="insertGroupUser" parameterType="User">
+        insert into GROUP_JOIN(user_seq, group_seq, join_nickname, join_activate) values (#{userSeq},#{groupSeq},#{joinNickname}, #{joinActivate})
+    </insert>
+
+    <!--  그룹원 탈퇴  -->
+    <update id="deleteGroupUser" parameterType="HashMap">
+        update GROUP_JOIN
+        set join_activate = 0
+        where user_seq = #{userSeq} and group_seq = #{groupSeq}
+    </update>
+
+
+</mapper>

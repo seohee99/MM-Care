@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="sql.usergroup.mapper">
+    <select id="getGroup" resultType="group">
+        SELECT *
+        FROM USER_GROUP
+    </select>
+
+    <resultMap id="groupjoin" type="JOIN">
+        <result column="user_seq" property="userSeq" />
+        <result column="group_seq" property="groupSeq" />
+        <result column="join_nickname" property="joinNickname" />
+        <result column="join_activate" property="joinActivate"/>
+    </resultMap>
+
+    <resultMap id="pet" type="PET">
+        <result column="pet_seq" property="petSeq" />
+        <result column="group_seq" property="groupSeq" />
+        <result column="pet_name" property="petName" />
+        <result column="pet_birthdat" property="petBirthday" />
+        <result column="pet_gender" property="petGender" />
+        <result column="pet_img" property="petImg" />
+        <result column="pet_neutering" property="petNeutering" />
+        <result column="pet_disease" property="petDisease" />
+        <result column="pet_kind" property="petKind" />
+        <result column="pet_color" property="petColor" />
+    </resultMap>
+
+    <resultMap id="usergroup" type="GROUP">
+        <result column="group_seq" property="groupSeq" />
+        <result column="group_name" property="groupName" />
+        <result column="group_leader" property="groupLeader" />
+        <result column="group_memo" property="groupMemo" />
+        <collection property="join" resultMap="group_join" />
+        <collection property="pet" resultMap="pet" />
+    </resultMap>
+
+    
+    <!-- 사용자가 가입한 모든 그룹 -->
+    <select id="getGroupsByUserSeq" parameterType="int" resultMap="usergroup">
+        select g.group_seq, g.group_name, g.group_leader, g.group_memo, j.user_seq, j.join_nickname, j.join_activate
+        from USER_GROUP g, GROUP_JOIN j
+        where g.group_seq = j.group_seq
+        and j.user_seq = #{VALUE}
+        and j.join_activate = 1
+    </select>
+
+    <!-- 그룹 생성  -->
+    <insert id="createGroup" parameterType="Group">
+        insert into USER_GROUP(group_name, group_leader, group_memo)
+        values (#{groupName},#{groupLeader},#{groupMemo})
+
+
+    </insert>
+
+
+
+
+
+
+</mapper>
