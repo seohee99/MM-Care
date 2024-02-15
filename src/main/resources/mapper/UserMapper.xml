@@ -2,14 +2,14 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="sql.user.mapper">
 
-    <resultMap id="groupjoin" type="JOIN">
+    <resultMap id="groupjoin" type="Join">
         <result column="user_seq" property="userSeq" />
         <result column="group_seq" property="groupSeq" />
         <result column="join_nickname" property="joinNickname" />
         <result column="join_activate" property="joinActivate"/>
     </resultMap>
 
-    <resultMap id="user" type="USER">
+    <resultMap id="user" type="User">
         <result column="user_seq" property="userSeq" />
         <result column="user_email" property="userEmail" />
         <result column="user_phone" property="userPhone" />

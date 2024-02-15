@@ -6,14 +6,14 @@
         FROM USER_GROUP
     </select>
 
-    <resultMap id="groupjoin" type="JOIN">
+    <resultMap id="groupjoin" type="Join">
         <result column="user_seq" property="userSeq" />
         <result column="group_seq" property="groupSeq" />
         <result column="join_nickname" property="joinNickname" />
         <result column="join_activate" property="joinActivate"/>
     </resultMap>
 
-    <resultMap id="pet" type="PET">
+    <resultMap id="pet" type="Pet">
         <result column="pet_seq" property="petSeq" />
         <result column="group_seq" property="groupSeq" />
         <result column="pet_name" property="petName" />
@@ -26,12 +26,12 @@
         <result column="pet_color" property="petColor" />
     </resultMap>
 
-    <resultMap id="usergroup" type="GROUP">
+    <resultMap id="usergroup" type="Group">
         <result column="group_seq" property="groupSeq" />
         <result column="group_name" property="groupName" />
         <result column="group_leader" property="groupLeader" />
         <result column="group_memo" property="groupMemo" />
-        <collection property="join" resultMap="group_join" />
+        <collection property="join" resultMap="groupjoin" />
         <collection property="pet" resultMap="pet" />
     </resultMap>
 
@@ -49,8 +49,6 @@
     <insert id="createGroup" parameterType="Group">
         insert into USER_GROUP(group_name, group_leader, group_memo)
         values (#{groupName},#{groupLeader},#{groupMemo})
-
-
     </insert>
 
 

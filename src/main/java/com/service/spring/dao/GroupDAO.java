@@ -4,6 +4,6 @@ import com.service.spring.vo.Group;
 
 import java.util.List;
 
-public interface UserGroupDAO {
+public interface GroupDAO {
     List<Group> getUserGroup();
 }

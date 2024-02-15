@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 
 @Repository
-public class UserGroupDAOImpl implements UserGroupDAO {
+public class GroupDAOImpl implements UserGroupDAO {
     @Autowired
     private SqlSession sqlSession;
     public static final String NS = "sql.usergroup.mapper.";
