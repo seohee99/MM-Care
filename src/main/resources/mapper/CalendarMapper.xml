@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="sql.calendar.mapper">
+    <select id="getGroups" parameterType="long" resultType="hashmap">
+        SELECT group_seq, join_nickname
+        FROM GROUP_JOIN
+        WHERE user_seq = #{VALUE}
+    </select>
+
+    <select id="getGroupDogs" parameterType="long" resultType="hashmap">
+        SELECT pet_seq, pet_name, pet_color
+        FROM PET
+        WHERE group_seq = #{VALUE}
+    </select>
+
+    <insert id="addPlan" parameterType="calendar">
+        INSERT INTO CALENDER_DETAIL
+        (pet_seq, group_seq, cal_startdate, cal_enddate, cal_title, cal_details, cal_special)
+        VALUES
+        (#{aniSeq}, #{groupSeq}, #{calStartDate}, #{calEndDate}, #{calTitle}, #{calDetails}, #{calSpecial})
+    </insert>
+
+    <select id="getGroupMonthlyPlan" parameterType="hashmap" resultType="calendar">
+        <![CDATA[
+        SELECT cal_seq, pet_seq AS ani_seq, cal_startdate, cal_enddate, cal_title, cal_details, cal_special
+        FROM CALENDER_DETAIL
+        WHERE group_seq = #{groupSeq}
+            AND (cal_startdate >= #{date} AND cal_startdate <= LAST_DAY(#{date}))
+           OR (cal_enddate >= #{date} AND cal_enddate <= LAST_DAY(#{date}))
+        ]]>
+    </select>
+
+    <select id="getGroupDailyPlan" parameterType="hashmap" resultType="calendar">
+        SELECT cal_seq, pet_seq, cal_startdate, cal_enddate, cal_title, cal_details, cal_special
+        FROM CALENDER_DETAIL
+        WHERE group_seq = #{groupSeq}
+            AND #{date} BETWEEN cal_startdate AND cal_enddate;
+    </select>
+
+    <delete id="deleteGroupPlan" parameterType="long">
+        DELETE FROM CALENDER_DETAIL
+        WHERE cal_seq = #{VALUE}
+    </delete>
+
+    <update id="updateGroupPlan" parameterType="calendar">
+        UPDATE CALENDER_DETAIL
+        SET pet_seq = #{aniSeq}, cal_startdate = #{calStartDate}, cal_enddate = #{calEndDate},
+            cal_title = #{calTitle}, cal_details = #{calDetails}, cal_special = #{calSpecial}
+        WHERE cal_seq = #{calSeq}
+    </update>
+</mapper>
