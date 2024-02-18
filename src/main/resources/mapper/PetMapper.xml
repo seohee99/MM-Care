@@ -5,15 +5,20 @@
     <!--  특정 그룹에 대한 모든 애완 동물  -->
     <select id="getPetsByGroupSeq" parameterType="int" resultType="Pet">
         select p.pet_seq, p.pet_name, p.pet_birthday, p.pet_img, p.pet_neutering, p.pet_disease, p.pet_kind, p.pet_color
-        from USER_GROUP g, PET p
-        where g.group_seq = p.group_seq
-        and p.group_seq = #{VALUE}
+        from PET p
+        where p.group_seq = #{VALUE}
     </select>
 
     <!-- 애완동물 추가 -->
-    <insert id="insertPet" parameterType="Pet">
+    <insert id="insertPet" parameterType="Pet" useGeneratedKeys="true" keyProperty="pet_seq">
         insert into PET(group_seq, pet_name, pet_birthday, pet_gender, pet_img, pet_neutering, pet_disease, pet_kind, pet_color)
         values (#{groupSeq}, #{petName}, #{petBirthday}, #{petGender}, #{petImg}, #{petNeutering}, #{petDisease}, #{petKind}, #{petColor})
     </insert>
+
+    <!-- 애완 동물 삭제   -->
+    <delete id="deletePet" parameterType="int">
+        delete from PET
+        where pet_seq = #{VALUE}
+    </delete>
 
 </mapper>

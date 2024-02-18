@@ -35,7 +35,7 @@
         <collection property="pet" resultMap="pet" />
     </resultMap>
 
-    
+
     <!-- 사용자가 가입한 모든 그룹 -->
     <select id="getGroupsByUserSeq" parameterType="int" resultMap="usergroup">
         select g.group_seq, g.group_name, g.group_leader, g.group_memo, j.user_seq, j.join_nickname, j.join_activate
@@ -45,15 +45,23 @@
         and j.join_activate = 1
     </select>
 
+
+    <!-- 사용자가 가입한 특정 그룹 -->
+    <select id="getGroupsByUserSeq" parameterType="hashmap" resultMap="usergroup">
+        select g.group_seq, g.group_name, g.group_leader, g.group_memo, j.user_seq, j.join_nickname, j.join_activate
+        from USER_GROUP g, GROUP_JOIN j
+        where g.group_seq = j.group_seq
+        and j.user_seq = #{userSeq}
+        and g.group_seq = #{groupSeq}
+        and j.join_activate = 1
+    </select>
+
+
     <!-- 그룹 생성  -->
-    <insert id="createGroup" parameterType="Group">
+    <!--  insert쿼리 실행 후 groupSeq를 반환  -->
+    <insert id="createGroup" parameterType="Group" useGeneratedKeys="true" keyProperty="groupSeq">
         insert into USER_GROUP(group_name, group_leader, group_memo)
         values (#{groupName},#{groupLeader},#{groupMemo})
     </insert>
-
-
-
-
-
 
 </mapper>

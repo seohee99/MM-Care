@@ -20,6 +20,13 @@
         <collection property="join" resultMap="group_join" />
     </resultMap>
 
+    <!--  사용자 조회  -->
+    <select id="getUser" parameterType="String" resultType="User">
+        select u.user_seq, u.user_email, u.user_phone, u.user_nickname, u.user_img, u.user_group_cnt, u.user_address
+        from USER
+        where u.user_email = #{VALUE}
+    </select>
+
     <!-- 특정 그룹에 대한 모든 사용자 -->
     <select id="getUsersByGroupSeq" parameterType="int" resultType="User">
         select u.user_seq, u.user_email, u.user_phone, u.user_nickname, u.user_img, u.user_group_cnt, u.user_address
@@ -28,4 +35,5 @@
         and j.group_seq = #{VALUE}
         and j.join_activate = 1
     </select>
+
 </mapper>
