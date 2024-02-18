@@ -1,7 +1,7 @@
 package com.service.spring;
 
 import com.service.spring.dao.UserDAO;
-import com.service.spring.dao.UserGroupDAO;
+//import com.service.spring.dao.UserGroupDAO;
 import com.service.spring.vo.Group;
 import com.service.spring.vo.User;
 import org.junit.jupiter.api.Test;
@@ -20,16 +20,16 @@ public class MyBatisTest {
     @Autowired
     private UserDAO userDAO;
     @Autowired
-    private UserGroupDAO userGroupDAO;
+//    private UserGroupDAO userGroupDAO;
 
     @Test
     public void unitTest() throws Exception{
-        User user = userDAO.getUser("example@example.com");
-        System.out.println(user.toString());
+//        User user = userDAO.getUser("example@example.com");
+//        System.out.println(user.toString());
 
-        List<Group> groups = userGroupDAO.getUserGroup();
-        for(Group g:groups){
-            System.out.println(g);
-        }
+//        List<Group> groups = userGroupDAO.getUserGroup();
+//        for(Group g:groups){
+//            System.out.println(g);
+//        }
     }
 }

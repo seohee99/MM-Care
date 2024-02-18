@@ -16,6 +16,11 @@ public class UserDAOImpl implements UserDAO {
     public static final String NS = "sql.user.mapper.";
 
     @Override
+    public User getUser(String userEmail) {
+        return sqlSession.selectOne(NS + "getUser", userEmail);
+    }
+
+    @Override
     public List<User> getUserByGroupSeq(int groupSeq) {
         return sqlSession.selectList(NS + "getUserByGroupSeq", groupSeq);
     }
