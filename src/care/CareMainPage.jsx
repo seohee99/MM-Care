@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 
 import dogImg from "./image/dog.png";
 import check from "./image/full.png";
 import checkEmpty from "./image/emty.png";
-import { useNavigate } from "react-router-dom";
 
 function CareMainPage() {
   const [userId, setUserId] = useState("");
@@ -68,11 +68,50 @@ function CareMainPage() {
 
     fetchData = sessionStorage.getItem("mediMaxCnt");
     setMediMaxCnt(fetchData);
+
+    fetch(`http://localhost:9999/care/food/list`, {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        petSeq: "2",
+        date: "2023-11-26",
+        // 필요한 다른 데이터들도 같이 입력해주세요
+      }),
+    })
+      .then((res) => {
+        if (res.ok) {
+          console.log("식사 체크 성공...");
+          return res.json();
+        } else {
+          throw new Error("식사 체크 추가 실패...");
+        }
+      })
+      .then((res) => {
+        console.log(res);
+        sessionStorage.setItem("user", JSON.stringify(res));
+      })
+      .catch((e) => {
+        console.error(e);
+      });
   }, []);
 
   const movePage = useNavigate();
   function go() {
     movePage("/aa");
+  }
+  function goFoodCare() {
+    movePage("/foodCare");
+  }
+  function goWalkCare() {
+    movePage("/walkCare");
+  }
+  function goMediCare() {
+    movePage("/mediCare");
+  }
+  function goPoopCare() {
+    movePage("/poopCare");
   }
   return (
     <Container>
@@ -94,7 +133,7 @@ function CareMainPage() {
         <a>약 잘 먹이기!</a>
       </Notice>
 
-      <CheckBox>
+      <CheckBox onClick={goFoodCare}>
         <ItemName>식사</ItemName>
         <ItemCount>
           체크 횟수: {foodCnt} :: 총 {foodMaxCnt} 회
@@ -119,7 +158,7 @@ function CareMainPage() {
         </Check>
       </CheckBox>
 
-      <CheckBox>
+      <CheckBox onClick={goWalkCare}>
         <ItemName>산책</ItemName>
         <ItemCount>
           체크 횟수: {walkCnt} :: 총 {walkMaxCnt} 회
@@ -144,7 +183,7 @@ function CareMainPage() {
         </Check>
       </CheckBox>
 
-      <CheckBox>
+      <CheckBox onClick={goMediCare}>
         <ItemName>약</ItemName>
         <ItemCount>
           체크 횟수: {mediCnt} :: 총 {mediMaxCnt} 회
@@ -169,7 +208,7 @@ function CareMainPage() {
         </Check>
       </CheckBox>
 
-      <CheckBox>
+      <CheckBox onClick={goPoopCare}>
         <ItemName>배변</ItemName>
         <ItemCount>대변 횟수: {poopCnt}</ItemCount>
         <ItemCount>소변 횟수: {peeCnt}</ItemCount>

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import styled from "styled-components";
 import { useNavigate } from "react-router-dom";
 
-function NoticeEditPage() {
+function WalkCarePage() {
   const movePage = useNavigate();
   function gohome() {
     movePage("/");
@@ -12,7 +12,11 @@ function NoticeEditPage() {
       <Main>
         <form action="/">
           <input type="text"></input>
-          <input type="button" value={"수정 완료"} onClick={gohome}></input>
+          <input
+            type="button"
+            value={"산책관리 페이지"}
+            onClick={gohome}
+          ></input>
         </form>
       </Main>
     </>
@@ -24,4 +28,4 @@ const Main = styled.div`
   height: 100%;
   padding: 10%;
 `;
-export default NoticeEditPage;
+export default WalkCarePage;
